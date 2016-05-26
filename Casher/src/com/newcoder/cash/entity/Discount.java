@@ -1,5 +1,6 @@
 package com.newcoder.cash.entity;
 
+//according to data type ,it may have more kinds of discount type
 public class Discount {
 	private String type;
 	private String[] barcodes;

@@ -1,5 +1,7 @@
 package com.newcoder.cash.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 /**
  * @author chaos
  *

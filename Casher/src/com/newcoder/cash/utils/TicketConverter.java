@@ -9,7 +9,7 @@ import com.newcoder.cash.entity.ShoppingInfo;
 
 public class TicketConverter {
 	
-	public List<ShoppingInfo> convert(String[] args){
+	public static List<ShoppingInfo> convert(String[] args){
 		List<ShoppingInfo> list =new ArrayList<ShoppingInfo>();
 		List<String> types = new LinkedList<>();	
 		for(String s:args){
@@ -35,7 +35,6 @@ public class TicketConverter {
 				}
 			}
 		}
-		return list;
-		
+		return list;	
 	}
 }
