@@ -13,6 +13,7 @@ public class GetResourceTest {
 	@Test
 	public void GetGoods(){
 		try {
+			@SuppressWarnings("unused")
 			GoodsResource res =new GoodsResource("goods.json");
 			List<Goods> list = GoodsResource.getResource();
 			for(Goods g:list){

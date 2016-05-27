@@ -6,11 +6,13 @@ import java.util.List;
 
 import org.junit.Test;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.newcoder.cash.entity.Discount;
 import com.newcoder.cash.entity.ShoppingInfo;
 import com.newcoder.cash.service.CashSolve;
 import com.newcoder.cash.utils.SimpleParser;
 import com.newcoder.cash.utils.TicketConverter;
+import com.newcoder.cash.utils.TicketsGnerator;
 
 public class ConverTest {
 	TicketConverter tc = new TicketConverter();
@@ -39,6 +41,13 @@ public class ConverTest {
 		l=CashSolve.cash(l, new Discount("half", new String[]{"ITEM000005", "ITEM000001"}) );
 		for (ShoppingInfo i : l) {
 			System.out.println("good:" + i.getGood().toString() + "  num:" + i.getNum()+" sum:"+i.getSumprice()+" dis:"+i.getDisprice());
+		}
+		try {
+			String json=TicketsGnerator.generate(l);
+			System.out.println("ticket:  "+json);
+		} catch (JsonProcessingException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 		System.out.println("                ");
 	}

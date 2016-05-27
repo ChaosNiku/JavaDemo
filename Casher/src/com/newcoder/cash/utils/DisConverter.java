@@ -10,7 +10,6 @@ import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.databind.MappingIterator;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.newcoder.cash.entity.Discount;
-import com.newcoder.cash.entity.Goods;
 import com.newcoder.cash.resource.GoodsResource;
 
 /**
@@ -21,7 +20,7 @@ import com.newcoder.cash.resource.GoodsResource;
  */
 public class DisConverter {
 	@SuppressWarnings("unchecked")
-	public static List<Discount> GoodsResource(String url) throws IOException {
+	public static List<Discount> GetResource(String url) throws IOException {
 		InputStream is = GoodsResource.class.getClassLoader().getResourceAsStream(url);
 		JsonFactory jf = new JsonFactory();
 		JsonParser js = jf.createParser(is);
