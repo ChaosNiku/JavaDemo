@@ -21,34 +21,47 @@ public class TicketsGnerator {
 		ObjectMapper map = new ObjectMapper();
 		Map<String,Object> objmap = new HashMap<>();
 		boolean flag =false;
+		json.append("{\"购物清单\":[");
+		int i=1;
+		int count =0;
 		for(ShoppingInfo info:cart){
-			//		需要一List存放
-			if(info.isDis()) flag=true;
+			if(info.isDis()){
+				flag=true;
+				count++;
+			}
 			objmap.put("名称", info.getGood().getName());
 			objmap.put("数量", String.valueOf(info.getNum())+info.getGood().getUnit());
 			objmap.put("单价", info.getGood().getPrice());
 			objmap.put("小计", info.getSumprice());
-			json.append(map.writeValueAsString(objmap));
+			if(i<cart.size())
+			json.append(map.writeValueAsString(objmap)+",");
+			else json.append(map.writeValueAsString(objmap));
 			objmap.clear();
 			totalPrice+=info.getSumprice();
+			i++;
 			}
+		json.append("],\"单品打折商品\":[");
 		if(flag){
 		objmap.clear();
+		i=0;
 		for(ShoppingInfo info:cart){
 			if(info.isDis()){
+				i++;
 				objmap.put("名称", info.getGood().getName());
 				objmap.put("数量", String.valueOf(info.getDisprice()/info.getGood().getPrice()*2)+info.getGood().getUnit());
-				json.append(map.writeValueAsString(objmap));
-				objmap.clear();
 				totalDisPrice+=info.getDisprice();
+				if(i<count) json.append(map.writeValueAsString(objmap)+",");
+				else  json.append(map.writeValueAsString(objmap));
+				objmap.clear();
 				}
 			}
 		}
-		objmap.put("总计", String.valueOf(totalPrice));
+		json.append("],\"总计\":"+String.valueOf(totalPrice));
 		if(flag){
 			objmap.put("节省", String.valueOf(totalDisPrice));
+			json.append(",\"节省\":"+String.valueOf(totalDisPrice));
 		}
-		json.append(map.writeValueAsString(objmap));
+		json.append("}");
 		return json.toString();
 		
 	}

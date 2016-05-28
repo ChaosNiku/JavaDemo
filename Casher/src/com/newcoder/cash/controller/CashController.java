@@ -28,7 +28,7 @@ import com.newcoder.cash.utils.TicketsGnerator;
 @Controller
 public class CashController {
 	
-	@RequestMapping(value="cash",produces="text/plain;charset=UTF-8")	
+	@RequestMapping(value="cash.do",produces="application/json;charset=UTF-8")	
 	public @ResponseBody String cashredirect(Model model,HttpServletRequest req,HttpServletResponse res){
 		String ticket = req.getParameter("ticket");
 		CashInit.init();
@@ -46,9 +46,9 @@ public class CashController {
 		
 	}
 	@RequestMapping(value="object")
-	public @ResponseBody String readobj(String tb){
+	public  String readobj(String tb){
 		System.out.println(tb);
-		return tb.toString();
+		return "index.jsp";
 		
 	}
 }

@@ -2,9 +2,40 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>display</title>
+<link rel="stylesheet" href="style/index.css" media="screen" title="no title" charset="utf-8"/>
+<script src="http://libs.baidu.com/jquery/1.9.0/jquery.js" type="text/javascript"></script>
 </head>
 <body>
-
+  <div id="container">
+    <textarea name="text" id="text" rows="8" cols="40">please enter the json</textarea>
+    <input type="submit" id="button" class="button orange">
+  </div>
+    <p id="display">
+      display
+    </p>
+    <script type="text/javascript">
+      $("#button").bind("click",function(){
+        alert("success");
+        var str =$("#text").val();
+        $.get("cash.do",{"ticket":str},function(data){
+          var reg =new RegExp('{');
+          var raw =data;
+          raw=raw.replace(reg,"");
+          raw=raw.replace(new RegExp('\"'),"");
+          var str =new Array(200);
+          str = raw.split(new RegExp('}'));
+          $("#display").html("*<没钱赚商店>购物清单*"+"<br>"+str);
+          $.each(str,function(n,value){
+            // 匹配单价这两个字
+            if(!value.match()){
+              $("#display").append("<p><hr>value</p>");
+            }else {
+                $("#display").append("<p>value</p>");
+            }
+          });
+        });
+      });
+    </script>
 </body>
 </html>
