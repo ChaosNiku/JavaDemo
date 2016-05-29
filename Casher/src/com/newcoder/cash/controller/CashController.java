@@ -45,10 +45,4 @@ public class CashController {
 		return little;
 		
 	}
-	@RequestMapping(value="object")
-	public  String readobj(String tb){
-		System.out.println(tb);
-		return "index.jsp";
-		
-	}
 }

@@ -3,7 +3,7 @@ package com.newcoder.cash.entity;
 /**
  * @author chaos
  * @version 0.23
- *
+ *	entity contains goods ,number of shopping ,total price,the money has been saved and whether the good is discount
  */
 public class ShoppingInfo {
 	private Goods good;

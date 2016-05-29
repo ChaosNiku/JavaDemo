@@ -21,7 +21,7 @@ public class TicketsGnerator {
 		ObjectMapper map = new ObjectMapper();
 		Map<String,Object> objmap = new HashMap<>();
 		boolean flag =false;
-		json.append("{\"购物清单\":[");
+		json.append("{\"shoppingList\":[");
 		int i=1;
 		int count =0;
 		for(ShoppingInfo info:cart){
@@ -29,10 +29,10 @@ public class TicketsGnerator {
 				flag=true;
 				count++;
 			}
-			objmap.put("名称", info.getGood().getName());
-			objmap.put("数量", String.valueOf(info.getNum())+info.getGood().getUnit());
-			objmap.put("单价", info.getGood().getPrice());
-			objmap.put("小计", info.getSumprice());
+			objmap.put("designation", info.getGood().getName());
+			objmap.put("count", String.valueOf(info.getNum())+info.getGood().getUnit());
+			objmap.put("unitPrice", info.getGood().getPrice());
+			objmap.put("subtotal", info.getSumprice());
 			if(i<cart.size())
 			json.append(map.writeValueAsString(objmap)+",");
 			else json.append(map.writeValueAsString(objmap));
@@ -40,15 +40,15 @@ public class TicketsGnerator {
 			totalPrice+=info.getSumprice();
 			i++;
 			}
-		json.append("],\"单品打折商品\":[");
+		json.append("],\"discount\":[");
 		if(flag){
 		objmap.clear();
 		i=0;
 		for(ShoppingInfo info:cart){
 			if(info.isDis()){
 				i++;
-				objmap.put("名称", info.getGood().getName());
-				objmap.put("数量", String.valueOf(info.getDisprice()/info.getGood().getPrice()*2)+info.getGood().getUnit());
+				objmap.put("designation", info.getGood().getName());
+				objmap.put("count", String.valueOf(info.getDisprice()/info.getGood().getPrice()*2)+info.getGood().getUnit());
 				totalDisPrice+=info.getDisprice();
 				if(i<count) json.append(map.writeValueAsString(objmap)+",");
 				else  json.append(map.writeValueAsString(objmap));
@@ -56,10 +56,9 @@ public class TicketsGnerator {
 				}
 			}
 		}
-		json.append("],\"总计\":"+String.valueOf(totalPrice));
+		json.append("],\"total\":"+String.valueOf(totalPrice));
 		if(flag){
-			objmap.put("节省", String.valueOf(totalDisPrice));
-			json.append(",\"节省\":"+String.valueOf(totalDisPrice));
+			json.append(",\"save\":"+String.valueOf(totalDisPrice));
 		}
 		json.append("}");
 		return json.toString();

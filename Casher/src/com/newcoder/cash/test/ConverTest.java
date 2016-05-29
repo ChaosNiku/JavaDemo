@@ -14,6 +14,15 @@ import com.newcoder.cash.utils.SimpleParser;
 import com.newcoder.cash.utils.TicketConverter;
 import com.newcoder.cash.utils.TicketsGnerator;
 
+/**
+ * @author chaos
+ * 
+ * Method convert
+ * use exists barcode to convert to the goods info
+ * 
+ * Method cal
+ * use exists barcode & discount info. to generate and calculate the totalPrice
+ */
 public class ConverTest {
 	TicketConverter tc = new TicketConverter();
 	List<ShoppingInfo> l = new LinkedList<ShoppingInfo>();
@@ -31,7 +40,7 @@ public class ConverTest {
 		}
 
 	}
-
+	
 	@Test
 	public void cal() {
 		System.out.println("START");

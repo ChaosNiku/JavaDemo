@@ -8,6 +8,11 @@ import org.junit.Test;
 import com.newcoder.cash.entity.Goods;
 import com.newcoder.cash.resource.GoodsResource;
 
+
+/**
+ * @author chaos
+ * load json file in the project dir and parse the goods info. and discount info. test
+ */
 public class GetResourceTest {
 	
 	@Test

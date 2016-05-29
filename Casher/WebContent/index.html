@@ -8,32 +8,46 @@
 </head>
 <body>
   <div id="container">
-    <textarea name="text" id="text" rows="8" cols="40">please enter the json</textarea>
-    <input type="submit" id="button" class="button orange">
+    <textarea name="text" id="text" rows="8" cols="40">please enter the barcodes(must conforms to json format)</textarea>
+    <input type="submit" id="button" class="button orange" value="生成清单">
   </div>
-    <p id="display">
-      display
-    </p>
+  <div id="display">
+    <p id="theOne">display the goods info.</p>
+    <hr />
+    <p id="theTwo">display the discount info.</p>
+    <hr />
+    <p id="theThree">display totalprice</p>
+    <hr />
+  </div>
     <script type="text/javascript">
       $("#button").bind("click",function(){
-        alert("success");
         var str =$("#text").val();
         $.get("cash.do",{"ticket":str},function(data){
-          var reg =new RegExp('{');
-          var raw =data;
-          raw=raw.replace(reg,"");
-          raw=raw.replace(new RegExp('\"'),"");
-          var str =new Array(200);
-          str = raw.split(new RegExp('}'));
-          $("#display").html("*<没钱赚商店>购物清单*"+"<br>"+str);
-          $.each(str,function(n,value){
-            // 匹配单价这两个字
-            if(!value.match()){
-              $("#display").append("<p><hr>value</p>");
-            }else {
-                $("#display").append("<p>value</p>");
-            }
-          });
+          alert("success");
+          var shop = new Array();
+          for (var i = 0; i < data.shoppingList.length; i++) {
+            var x = new Object();
+            x = data.shoppingList[i];
+            var theName = x.designation;
+            var theSubt = x.subtotal + "（元）";
+            var theUnit = x.unitPrice + "（元）";
+            var theCount = x.count;
+            var number = theCount.replace(/[^0-9]/ig,"");
+            var prePrice =  number * x.unitPrice - x.subtotal + "（元）"
+            shop[i] = "名称：" + theName + " 数量：" + theCount + " 单价：" + theUnit + " 小计：" + theSubt ;
+          };
+          document.getElementById('theOne').innerHTML ="<strong>*<没钱赚商店>购物清单* </strong>"+ shop.join();
+          // 处理discount数组
+          var Discount = new Array();
+          for (var j = 0; j < data.discount.length; j++) {
+            var v = new Object();
+            v = data.discount[j];
+            var Name = v.designation;
+            var Count = v.count;
+            Discount[j] = "名称：" + Name + " 数量：" + Count;
+          };
+          document.getElementById('theTwo').innerHTML = "第二个半价商品："+Discount.join();
+          document.getElementById('theThree').innerHTML = "总计：" + data.total + "（元）" +" 节省：" + data.save + "（元）";
         });
       });
     </script>
