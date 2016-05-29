@@ -1,4 +1,8 @@
 # JavaDemo
+
+##Test Page
+www.chasoniku.com/Casher
+ 
 ##This is the demo for the newcoder tw
 ##first commit
 finish creating the entitys and convert the barcodes to the goods info. function
