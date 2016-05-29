@@ -1,7 +1,7 @@
 # JavaDemo
 
 ##Test Page
-www.chasoniku.com/Casher
+www.chaosniku.com/Casher
  
 ##This is the demo for the newcoder tw
 ##first commit
